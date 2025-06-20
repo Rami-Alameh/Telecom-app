@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ui-select/0.20.0/select.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ui-select/0.20.0/select.min.js"></script>
+
+
+    <!-- Angular Sanitize (required by ui-select) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.8.2/angular-sanitize.min.js"></script>
+    <!-- Custom Scripts -->
+    <!-- In _Layout.cshtml, ensure correct order and paths -->
+    <script src="~/Scripts/js/angular.min.js"></script>
+    <script src="~/Scripts/js/app.js"></script>
+    <script src="~/Scripts/js/deviceController.js"></script>
+    <script src="~/Scripts/js/clientController.js"></script>
+    <script src="~/Scripts/js/phoneNumbersController.js"></script>
+</head>
+<body ng-app="DeviceApp">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">Device Manager</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Home")">Devices</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Clients", "Home")">Clients</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("PhoneNumbers", "Home")">Phone Numbers</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Reservations", "Home")">Reservations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("PhoneNumbersReport", "Home")">Phone Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("ClientsReport", "Home")">Client Report</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Logout", "Account")">Logout</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        @RenderBody()
+    </div>
+
+</body>
+</html>

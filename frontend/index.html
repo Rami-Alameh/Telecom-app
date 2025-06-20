@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html ng-app="deviceApp">
+ <!-- ng-app tells AngularJS this is the root of the app called 'deviceApp' -->
+<head>
+    <meta charset="utf-8">
+    <title>Device Manager</title>
+
+    <!-- Bootstrap CSS for layout/styling -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- CSS sheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- AngularJS  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!-- UI Bootstrap used for modal  -->
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
+    <!-- js -->
+    <script src="js/app.js"></script>
+</head>
+<body ng-controller="DeviceController">
+    <!-- Binds this page to DeviceController logic -->
+
+    <div class="container">
+        <h2>Device Manager</h2>
+
+        <!-- Search bar -->
+        <input type="text" ng-model="searchText" placeholder="Search for a device"
+               class="form-control" style="width: 300px; display: inline-block; margin-right: 10px;">
+        <button class="btn btn-primary" ng-click="searchDevice()">Search</button>
+
+        <!-- Add device button, opens modal -->
+        <button class="btn btn-success" ng-click="openModal()">Add Device</button>
+
+        <!-- Device Table -->
+        <table class="table table-bordered table-striped" style="margin-top: 20px;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through each filtered device -->
+                <tr ng-repeat="device in filteredDevices">
+                    <td>{{device.id}}</td>
+                    <td>{{device.name}}</td>
+                    <td>
+                        <!-- Edit button opens modal pre-filled -->
+                        <button class="btn btn-warning btn-sm" ng-click="openModal(device)">Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal template embedded inside HTML -->
+    <script type="text/ng-template" id="deviceModal.html">
+        <div id="blurContainer" ng-class="{ 'blurred': isModalOpen }">
+            <div id="blurContainer" ng-class="{ 'blurred': isModalOpen }">
+                <h3 class="modal-title">{{modalTitle}}</h3> <!-- Title will be aa or edit based on action-->
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control" ng-model="device.name" placeholder="Enter device name">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="save()">{{isEdit ? 'Update' : 'Add'}}</button>
+                <button class="btn btn-default" ng-click="cancel()">Close</button>
+            </div>
+            </div>
+</script>
+</body>
+</html>

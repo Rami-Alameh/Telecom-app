@@ -1,0 +1,26 @@
+﻿# Visual Studio
+*.user
+*.suo
+*.sln.docstates
+*.sdf
+
+# Build output
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# Web config
+Web.config
+
+# NuGet
+packages/
+*.nupkg
+
+# Misc
+.vscode/
+.idea/
+*.log
+*.env
+node_modules/

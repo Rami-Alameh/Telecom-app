@@ -1,0 +1,10 @@
+﻿body {
+    background-color:ghostwhite;
+    align-content:center;
+}
+.blurred {
+    filter: blur(200px);
+    pointer-events: none; 
+    user-select: none;
+    
+}

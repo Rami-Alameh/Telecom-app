@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Clients Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" ng-controller="ClientsReportController">
+    <h2>Clients Report</h2>
+
+    <!-- Client Type Filter -->
+    <div class="row">
+        <div class="col-md-4">
+            <client-type-filter selected-type="selectedType"
+                                on-type-change="loadReport(type)"
+                                label="Filter by Client Type">
+            </client-type-filter>
+        </div>
+    </div>
+
+    <!-- Summary View (when no filter) -->
+    <div class="row" ng-if="!selectedType">
+        <div class="col-md-12">
+            <h3>Client Count by Type</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Client Type</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in clientCounts">
+                        <td>{{ item.TypeName }}</td>
+                        <td>{{ item.Count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Detailed View (when filtered) -->
+    <div class="row" ng-if="selectedType">
+        <div class="col-md-12">
+            <h3>{{ selectedType === 0 ? 'Individual' : 'Organization' }} Clients</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>type</th>
+                        <th>Birth Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="client in filteredClients">
+                        <td>{{ client.Id }}</td>
+                        <td>{{ client.Name }}</td>
+                        <td>{{ selectedType == 0 ? 'Individual' : 'Organization'}}</td>
+                        <td>{{ client.BirthDate ? (client.BirthDate | date:'mediumDate') : 'No Birthday' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/js/Directives/clientSelector.js"></script>
+<script src="~/Scripts/js/ClientReportController.js"></script>

@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Phone Numbers by Device and Status Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<div class="container report-container" ng-controller="PhoneNumbersReportController">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="report-title">Phone Numbers Report</h2>
+        </div>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="row report-filters">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="deviceFilter">Device:</label>
+                <select id="deviceFilter" class="form-control" ng-model="selectedDevice"
+                        ng-options="device.Id as device.Name for device in devices">
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="statusFilter">Phone Number Status:</label>
+                <select id="statusFilter" class="form-control" ng-model="selectedStatus"
+                        ng-options="status.value as status.label for status in statuses">
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Data -->
+    <div class="row">
+        <div class="col-md-12">
+            <div ng-if="loading" class="text-center">
+                <p>Loading report data...</p>
+            </div>
+
+            <table ng-if="!loading" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Device</th>
+                        <th>Phone Numbers Status</th>
+                        <th>Number of Phone Numbers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-if="phoneNumberStats.length === 0">
+                        <td colspan="3" class="text-center">No data available</td>
+                    </tr>
+                    <tr ng-repeat="item in phoneNumberStats">
+                        <td>{{ item.DeviceName }}</td>
+                        <td>{{ item.Status }}</td>
+                        <td>{{ item.Count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/js/PhoneNumbersReportController.js"></script>
